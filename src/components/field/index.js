@@ -62,6 +62,8 @@ export default class TextField extends PureComponent {
     lineType: 'solid',
     disabledLineType: 'dotted',
 
+    usePropsValue: false,
+
     disabled: false,
   };
 
@@ -290,11 +292,9 @@ export default class TextField extends PureComponent {
 
   value() {
     let { text } = this.state;
-    let { defaultValue } = this.props;
+    let { defaultValue, usePropsValue, value: propsValue } = this.props;
 
-    let value = this.isDefaultVisible()?
-      defaultValue:
-      text;
+    let value = usePropsValue ? propsValue : ( this.isDefaultVisible() ? defaultValue : text );
 
     if (null == value) {
       return '';
